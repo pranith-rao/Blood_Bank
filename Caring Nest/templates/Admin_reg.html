@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+<!--title part-->
+{% block title %}Admin Signup{% endblock %}
+<!--head part-->
+{% block head %} {{ super() }}
+<style>
+  #img1 {
+    height: 540px;
+  }
+  h2 {
+    text-align: center;
+    font-family: Bahnschrift;
+  }
+  .card {
+    margin-top: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+  }
+  .card:hover {
+    box-shadow: 0 0 5px 5px #757575;
+    transition: ease 0.5s;
+  }
+  #button {
+    background-color: #5c6bc0;
+    width: 90px;
+  }
+  #btn {
+    background-color: #c62828;
+    width: 90px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 650px) {
+    #img1 {
+      height: 250px;
+    }
+    .card {
+      margin-top: 20px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+  }
+  @media screen and (min-width: 650px) and (max-width: 800px) {
+    #img1 {
+      height: 550px;
+    }
+  }
+  @media screen and (min-width: 800px) and (max-width: 1265px) {
+  }
+</style>
+{% endblock %}
+<!--content part-->
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-11">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-md-5">
+            <img
+              src="{{url_for('static', filename='admin2.jpg')}}"
+              class="card-img"
+              alt="about"
+              id="img1"
+            />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h2>Admin Registration</h2>
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %} {% for cat,msg in messages %} {% if cat ==
+              "error" %}
+              <script class="text-uppercase">
+                swal({
+                  title: "Error!",
+                  text: "{{msg|upper}}",
+                  icon: "error",
+                  button: "OK"
+                });
+              </script>
+              {% else %}
+              <script class="text-uppercase">
+                swal({
+                  title: "Success!",
+                  text: "{{msg|upper}}",
+                  icon: "success",
+                  button: "OK",
+                  timer: 1500
+                });
+              </script>
+              {% endif %} {% endfor %} {% endif %} {% endwith %}
+              <hr />
+              <form action="/admin_reg_data" method="post">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="pass"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Re-Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="repass"
+                    required
+                  />
+                </div>
+                <br />
+                <input
+                  type="submit"
+                  value="Register"
+                  class="btn btn-info"
+                  name="submit"
+                  id="button"
+                />&nbsp;&nbsp;&nbsp;
+                <input
+                  type="reset"
+                  value="Reset"
+                  class="btn btn-danger"
+                  name="reset"
+                  id="btn"
+                />
+              </form>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>

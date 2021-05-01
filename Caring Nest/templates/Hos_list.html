@@ -1,0 +1,93 @@
+{% extends "admin_layout.html" %}
+<!--title part-->
+{% block title %}Hospital List{% endblock %}
+<!--head part-->
+{% block head %} {{ super() }}
+<style>
+  table{
+  font-family:'Roboto' sans-serif;border-collapse: collapse;width: 100%;
+}
+table tr:nth-child(even){
+  background-color: #EEEEEE;
+  }
+table th {
+  padding-top: 14px;padding-bottom: 14px;text-align:left;background-color:#EF5350;color: whitesmoke;letter-spacing:0.5px;
+  user-select: none;border-right: 0.5px solid #FFCDD2;
+ }
+table td
+{
+border-right: 0.5px solid #FFCDD2;height:70px;
+}
+table td, table th {
+ border-bottom: 0.5px solid #FFCDD2;
+}
+table tr:hover {
+  background-color: #FFEBEE;cursor: pointer;
+}
+</style>
+{% endblock %}
+<!--content part-->
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for cat,msg in messages %}
+  {% if cat == "error" %}
+    <script class="text-uppercase">
+			swal({
+				title: 'Error!',
+				text: '{{msg|upper}}',
+				icon: 'error',
+				button: 'OK'
+			});
+			</script>
+		{% else %}
+		<script class="text-uppercase">
+			swal({
+				title: 'Success!',
+				text: '{{msg|upper}}',
+				icon: 'success',
+				button: 'OK',
+				timer: 1500
+			});
+		</script>
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+{% if data %}
+<div class="table-responsive">
+    <table class="table ">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        
+      </tr>
+      {% for i in data %}
+      <tr>
+          <td>{{i.hospitalid}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.phno}}</td>
+          <td>{{i.address}}</td>
+          <td ><a href="/hos_edit/{{i.hospitalid}}"><button class="btn btn-success"><i class="fa fa-edit"></i></button></a></td>
+          <td ><a href="/hos_del/{{i.hospitalid}}"><button class="btn btn-danger" type="submit" name="del"><i class="fa fa-trash"></i></button></a></td>
+          </tr>
+      {% endfor %}
+        
+   
+
+
+      </tr>
+     
+    </thead>
+    <tbody>
+  </tbody></table>
+  </div>
+{% endif %}
+
+
+  {% endblock %}

@@ -1,0 +1,182 @@
+{% extends "bank_layout.html" %}
+<!--title part-->
+{% block title %}Blood Bank Dashboard{% endblock %}
+<!--head part-->
+{% block head %} {{ super() }}
+<style>
+  .flip-card {
+    background-color: transparent;
+    width: 270px;
+    height: 250px;
+    perspective: 1000px;
+  }
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .flip-card-front {
+    background-color: #bbb;
+    color: black;
+  }
+  .flip-card-back {
+    color: black;
+    transform: rotateY(180deg);
+  }
+  .font {
+    font-size: 80px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  #ia {
+    font-size: 160px;
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  /* Extra small devices (phones, 600px and down) */
+  @media (min-width: 300px) and (max-width: 350px) {
+    .flip-card-inner {
+      width: 250px;
+    }
+  }
+  @media (min-width: 350px) and (max-width: 400px) {
+    .flip-card-inner {
+      width: 300px;
+    }
+  }
+  @media (min-width: 400px) and (max-width: 500px) {
+    .flip-card-inner {
+      width: 355px;
+    }
+  }
+  @media (min-width: 500px) and (max-width: 600px) {
+    .flip-card-inner {
+      width: 470px;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 800px) {
+    .flip-card-inner {
+      width: 150px;
+    }
+  }
+</style>
+{% endblock %}
+<!--content part-->
+
+{% block content %}
+<br /><br />
+<div class="container" style="margin-top: 40px">
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for cat,msg in messages %} {% if cat == "error" %}
+  <script class="text-uppercase">
+    swal({
+      title: "Error!",
+      text: "{{msg|upper}}",
+      icon: "error",
+      button: "OK"
+    });
+  </script>
+  {% else %}
+  <script class="text-uppercase">
+    swal({
+      title: "Success!",
+      text: "{{msg|upper}}",
+      icon: "success",
+      button: "OK",
+      timer: 1500
+    });
+  </script>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="flip-card" style="margin-bottom: 10px; margin-left: 17px">
+        <div class="flip-card-inner">
+          <div class="flip-card-front" style="background-color: #8e24aa">
+            <i
+              class="fa fa-users"
+              aria-hidden="true"
+              style="font-size: 60px"
+              id="ia"
+            ></i>
+            <div class="card-header" style="font-weight: 550; color: white">
+              TOTAL HOSPITAL
+            </div>
+          </div>
+          <div class="flip-card-back" style="background-color: #e1bee7">
+            <p class="font">{{data[0]}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <div class="col-sm-4">
+      <div class="flip-card" style="margin-bottom: 10px; margin-left: 17px">
+        <div class="flip-card-inner">
+          <div class="flip-card-front" style="background-color: #ef5350">
+            <i
+              class="fas fa-tint"
+              aria-hidden="true"
+              style="font-size: 60px"
+              id="ia"
+            ></i>
+            <div class="card-header" style="font-weight: 550; color: white">
+              TOTAL BLOOD BANK
+            </div>
+          </div>
+          <div class="flip-card-back" style="background-color: #ffcdd2">
+            <p class="font">{{data[2]}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-sm-4">
+        <div class="flip-card" style="margin-bottom: 10px; margin-left: 17px">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="background-color: #8d6e63">
+              <i
+                class="fas fa-hand-holding-heart"
+                aria-hidden="true"
+                style="font-size: 60px"
+                id="ia"
+              ></i>
+              <div class="card-header" style="font-weight: 550; color: white">
+                TOTAL DONAR
+              </div>
+            </div>
+            <div class="flip-card-back" style="background-color: #d7ccc8">
+              <p class="font">{{data[1]}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br /><br />
+
+      {% endblock %}
+    </div>
+  </div>
+</div>

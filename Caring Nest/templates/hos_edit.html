@@ -1,0 +1,156 @@
+{% extends "admin_layout.html" %}
+<!--title part-->
+{% block title %}Hospital Update{% endblock %}
+<!--head part-->
+{% block head %} {{ super() }}
+<style>
+  #img1 {
+    height: 530px;
+  }
+  h2 {
+    text-align: center;
+    font-family: Bahnschrift;
+  }
+  .card {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+  }
+  .card:hover {
+    box-shadow: 0 0 5px 5px #757575;
+    transition: ease 0.5s;
+  }
+  #button {
+    background-color: #5c6bc0;
+    width: 200px;
+    border-radius: 100px;
+  }
+  #btn {
+    background-color: #c62828;
+    width: 90px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 650px) {
+    #img1 {
+      height: 250px;
+    }
+    .card {
+      margin-top: 20px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+  }
+  @media screen and (min-width: 650px) and (max-width: 800px) {
+    #img1 {
+      height: 530px;
+    }
+  }
+  @media screen and (min-width: 800px) and (max-width: 1265px) {
+  }
+</style>
+{% endblock %}
+<!--content part-->
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-11">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-md-5">
+            <img
+              src="{{url_for('static', filename='upd.jpg')}}"
+              class="card-img"
+              alt="about"
+              id="img1"
+            />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h2>Hospital Update</h2>
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %} {% for cat,msg in messages %} {% if cat ==
+              "error" %}
+              <script class="text-uppercase">
+                swal({
+                  title: "Error!",
+                  text: "{{msg|upper}}",
+                  icon: "error",
+                  button: "OK"
+                });
+              </script>
+              {% else %}
+              <script class="text-uppercase">
+                swal({
+                  title: "Success!",
+                  text: "{{msg|upper}}",
+                  icon: "success",
+                  button: "OK",
+                  timer: 1500
+                });
+              </script>
+              {% endif %} {% endfor %} {% endif %} {% endwith %}
+              <hr />
+              <form action="/hos_edit_data/{{data.hospitalid}}" method="post">
+                <div class="form-group">
+                  <label>Hospital-id</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="hos_id"
+                    value="{{data.hospitalid}}"
+                    required
+                    readonly
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Hospital-name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    value="{{data.name}}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    minlength="10"
+                    maxlength="10"
+                    name="phno"
+                    value="{{data.phno}}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="address"
+                    value="{{data.address}}"
+                    required
+                  />
+                </div>
+                <br />
+                <div class="row justify-content-center">
+                  <input
+                    type="submit"
+                    value="Update"
+                    class="btn btn-info"
+                    name="submit"
+                    id="button"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      href="{{url_for('static', filename='log1.jpg')}}"
+      type="image/icon type"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='bootstrap.min.css')}}"
+      crossorigin="anonymous"
+    />
+    <script
+      src="{{url_for('static', filename='jquery-3.2.1.slim.min.js')}}"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="{{url_for('static', filename='popper.min.js')}}"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="{{url_for('static', filename='bootstrap.min.js')}}"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <script src="{{url_for('static', filename='sweetalert.min.js')}}"></script>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='animate.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='fontawesome.min.css')}}"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>{% block title %}{% endblock %} Health</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">{% block footer %} {% endblock %}</div>
+  </body>
+</html>

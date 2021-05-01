@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+<!--title part-->
+{% block title %}Hospital Login{% endblock %}
+<!--head part-->
+{% block head %} {{ super() }}
+<style>
+  #img1 {
+    height: 400px;
+  }
+  h2 {
+    text-align: center;
+    font-family: Bahnschrift;
+  }
+  p a{
+    text-decoration: none;
+   color: indigo;
+  }
+  .card {
+    margin-top: 70px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+  }
+  .card:hover {
+    box-shadow: 0 0 5px 5px #757575;
+    transition: ease 0.5s;
+  }
+  #button {
+    background-color: #5c6bc0;
+    width: 200px;
+    border-radius: 50px;
+  }
+  #btn {
+    background-color: #c62828;
+    width: 90px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 650px) {
+    #img1 {
+      height: 250px;
+    }
+    .card {
+      margin-top: 20px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+  }
+  @media screen and (min-width: 650px) and (max-width: 800px) {
+    #img1 {
+      height: 530px;
+    }
+  }
+  @media screen and (min-width: 800px) and (max-width: 1265px) {
+  }
+</style>
+{% endblock %}
+<!--content part-->
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-9">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-md-5">
+            <img
+              src="{{url_for('static', filename='hos.jpg')}}"
+              class="card-img"
+              alt="about"
+              id="img1"
+            />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h2>Hospital Login</h2>
+              {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for cat,msg in messages %}
+  {% if cat == "error" %}
+    <script class="text-uppercase">
+			swal({
+				title: 'Error!',
+				text: '{{msg|upper}}',
+				icon: 'error',
+				button: 'OK'
+			});
+			</script>
+		{% else %}
+		<script class="text-uppercase">
+			swal({
+				title: 'Success!',
+				text: '{{msg|upper}}',
+				icon: 'success',
+				button: 'OK',
+				timer: 1500
+			});
+		</script>
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+              <hr />
+              <form action="/hos_login_data" method="post">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Hospital-id</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    name="hosid"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    name="password"
+                    required
+                  />
+                </div>
+                <br />
+                <div class="row justify-content-center">
+                  <input
+                    type="submit"
+                    value="Login"
+                    class="btn btn-info"
+                    name="submit"
+                    id="button"
+                  />
+                </div>
+                <div style="text-align: end;margin-top: 15px;">
+                  <p><a href="/forgotpassword_hos">Forgot Password?</a></a></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>

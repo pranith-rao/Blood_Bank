@@ -1,0 +1,58 @@
+{% extends "Recep_layout.html" %}
+<!--title part-->
+{% block title %}Stock Details{% endblock %}
+<!--head part-->
+{% block head %} {{ super() }}
+<style>
+  table {
+    font-family: "Roboto" sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  table tr:nth-child(even) {
+    background-color: #eeeeee;
+  }
+  table th {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    text-align: left;
+    background-color: #ef5350;
+    color: whitesmoke;
+    letter-spacing: 0.5px;
+    user-select: none;
+    border-right: 0.5px solid #ffcdd2;
+  }
+  table td {
+    border-right: 0.5px solid #ffcdd2;
+    height: 70px;
+  }
+  table td,
+  table th {
+    border-bottom: 0.5px solid #ffcdd2;
+  }
+  table tr:hover {
+    background-color: #ffebee;
+    cursor: pointer;
+  }
+</style>
+{% endblock %}
+<!--content part-->
+{% block content %}
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Blood type</th>
+        <th scope="col">Units Available</th>
+      </tr>
+{% for i in data %}
+      <tr>
+        <td>{{i[1]}}</td>
+        <td>{{i[0]}}</td>
+      </tr>
+    {% endfor %}
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+{% endblock %}
