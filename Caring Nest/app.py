@@ -30,6 +30,17 @@ class Receptionist(db.Model):
 
     def __repr__(self):
         return "<Receptionist '{}'>".format(self.name)
+    
+    
+    class Outh_details(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    Outh_name = db.Column(db.String(50),nullable=False,unique=True)
+    Outh_email = db.Column(db.String(100),nullable=False,unique=True)
+    Outh_phone = db.Column(db.String(15),nullable=False)
+    
+
+    def __repr__(self):
+        return "<Outh_details '{}'>".format(self.name)
 
 class Hospital(db.Model):
     hospitalid = db.Column(db.Integer,unique=True,primary_key=True)
