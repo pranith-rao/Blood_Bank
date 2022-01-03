@@ -42,14 +42,6 @@ class Receptionist(db.Model):
     def __repr__(self):
         return "<Outh_details '{}'>".format(self.name)
 
-class Outh_facebook(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
-    Outh_fb_name = db.Column(db.String(50),nullable=False,unique=True)
-    Outh_fb_email = db.Column(db.String(100),nullable=False,unique=True)
-    Outh_fb_phone = db.Column(db.String(15),nullable=False)
-    
-
-
 class Hospital(db.Model):
     hospitalid = db.Column(db.Integer,unique=True,primary_key=True)
     name = db.Column(db.String(50),nullable=False,unique=True)
